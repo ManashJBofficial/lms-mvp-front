@@ -1,50 +1,107 @@
-# React + TypeScript + Vite
+# LMS (Learning Management System) Documentation Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tech Stack
+- **Frontend**: 
+  - React.js with TypeScript
+  - Shadcn UI Components
+  - TailwindCSS for styling
+  - React Query for data fetching
+  - React Hook Form for form management
+  - Zod for form validation
 
-Currently, two official plugins are available:
+- **Backend**:
+  - Node.js
+  - Express.js
+  - Prisma ORM
+  - JWT for authentication
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Database**:
+  - MySQL
 
-## Expanding the ESLint configuration
+## Completed Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. **Authentication**
+   - User registration with email verification
+   - Login system
+   - Role-based access (Admin/Instructor)
+   - Secure password handling
 
-- Configure the top-level `parserOptions` property like this:
+2. **Admin Features**
+   - Course CRUD operations
+   - Unique course code generation
+   - Instructor management
+   - Notice board management
+   - Excel upload for bulk teacher addition
+   - Comprehensive dashboard with analytics
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+3. **Instructor Features**
+   - Course joining via course code
+   - Notice board interaction
+   - Profile management
+   - Course-specific views
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+4. **Dashboard Analytics**
+   - Total course count
+   - Average teachers per course
+   - Gender distribution analysis
+   - Notice board engagement metrics
+   - Course-wise notice updates
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Incomplete Features
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. **Average Duration Tracking**
+   - Teacher time spent on LMS not implemented (Would require additional tracking mechanisms)
+
+## Technical Decisions
+
+### Why Polling vs Socket.io?
+
+1. **Simplicity**
+   - Polling is easier to implement and maintain
+   - Suitable for our use case where real-time updates aren't critical
+
+2. **Resource Efficiency**
+   - Lower server resources compared to maintaining WebSocket connections
+   - Adequate for periodic updates (every 30 seconds)
+
+3. **Scalability**
+   - Easier to scale with traditional HTTP infrastructure
+   - No need to manage WebSocket connection states
+
+4. **Use Case Appropriateness**
+   - Our LMS doesn't require instantaneous updates
+   - Notice board updates are not time-critical
+
+## Setup Instructions
+
+1. **Prerequisites**
+   - Node.js (v16+)
+   - MySQL
+   - Git
+
+2. **Installation Steps**
+   ```bash
+   # Clone repository
+   git clone [repository-url]
+
+   # Frontend setup
+   cd frontend
+   npm install
+   npm run dev
+
+   # Backend setup
+   cd backend
+   npm install
+   npm run dev
+   ```
+
+3. **Environment Setup**
+   - Create `.env` files in both frontend and backend
+   - Configure database connections
+   - Set up JWT secrets
+
+4. **Database Setup**
+   ```bash
+   npx prisma migrate dev
+   npx prisma generate
+   ```
