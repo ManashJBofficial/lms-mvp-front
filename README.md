@@ -52,6 +52,14 @@
 1. **Average Duration Tracking**
    - Teacher time spent on LMS not implemented (Would require additional tracking mechanisms)
 
+## Assumptions Made
+
+1. Single session per user
+2. Email verification required for registration
+3. Course codes are unique and auto-generated
+4. Notice board updates checked every 30 seconds
+5. Excel upload format is standardized
+
 ## Technical Decisions
 
 ### Why Polling vs Socket.io?
@@ -75,7 +83,7 @@
 ## Setup Instructions
 
 1. **Prerequisites**
-   - Node.js (v16+)
+   - Node.js (v18+)
    - MySQL
    - Git
 
@@ -105,3 +113,5 @@
    npx prisma migrate dev
    npx prisma generate
    ```
+
+
